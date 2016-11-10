@@ -6,22 +6,36 @@ defmodule PhoenixDynamodb.UserTest do
   alias ExAws.Dynamo
 
   setup_all do
-    User.delete_table
+    tables_list = Dynamo.list_tables |> ExAws.request! |> Map.get("TableNames")
+
+    if Enum.member?(tables_list, "Users") do
+      User.delete_table
+    end
+
     :ok
   end
 
-  test "Create table" do
+  test "Operation Users table" do
     User.create_table
 
     user = %User{email: "bubba@foo.com", name: "Bubba", age: 23, admin: false}
-    Dynamo.put_item("Users", user) |> ExAws.request!
 
-    result = Dynamo.get_item("Users", %{email: user.email})
-    |> ExAws.request!
+    User.put(user)
 
-    decoded_result = result["Item"]
-    |> Dynamo.Decoder.decode(as: PhoenixDynamodb.User)
+    result = User.get_by_email(user.email)
 
-    assert user == decoded_result
+    assert user == result
+
+    update_age_user = %{result | age: 24}
+
+    User.put(update_age_user)
+
+    update_user = User.get_by_email(update_age_user.email)
+
+    assert update_user == update_age_user
+
+    User.delete_by_email(update_age_user.email)
+
+    assert nil == User.get_by_email(update_age_user.email)
   end
 end
