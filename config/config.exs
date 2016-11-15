@@ -7,7 +7,7 @@ use Mix.Config
 
 # General application configuration
 config :phoenix_dynamodb,
-  ecto_repos: [PhoenixDynamodb.Repo]
+  ecto_repos: []
 
 # Configures the endpoint
 config :phoenix_dynamodb, PhoenixDynamodb.Endpoint,
@@ -25,3 +25,6 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
+config :ex_aws, :dynamodb,
+  region: "ap-northeast-1"

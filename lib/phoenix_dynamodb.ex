@@ -9,7 +9,7 @@ defmodule PhoenixDynamodb do
     # Define workers and child supervisors to be supervised
     children = [
       # Start the Ecto repository
-      supervisor(PhoenixDynamodb.Repo, []),
+      # supervisor(PhoenixDynamodb.Repo, []),
       # Start the endpoint when the application starts
       supervisor(PhoenixDynamodb.Endpoint, []),
       # Start your own worker by calling: PhoenixDynamodb.Worker.start_link(arg1, arg2, arg3)
