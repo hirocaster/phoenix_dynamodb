@@ -20,22 +20,27 @@ defmodule PhoenixDynamodb.UserTest do
 
     user = %User{email: "bubba@foo.com", name: "Bubba", age: 23, admin: false}
 
-    User.put(user)
+    user = User.put(user)
 
-    result = User.get_by_email(user.email)
+    result = User.get_by_id(user.id)
 
-    assert user == result
+    assert result.id
+
+    # id以外は同一値
+    assert %{user | id: result.id} == result
 
     update_age_user = %{result | age: 24}
 
     User.put(update_age_user)
 
-    update_user = User.get_by_email(update_age_user.email)
+    update_user = User.get_by_id(update_age_user.id)
 
     assert update_user == update_age_user
 
-    User.delete_by_email(update_age_user.email)
+    User.delete_by_id(update_age_user.id)
 
-    assert nil == User.get_by_email(update_age_user.email)
+    assert nil == User.get_by_id(update_age_user.id)
+
+    # User.generate_test_data(10000)
   end
 end

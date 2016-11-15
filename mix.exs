@@ -41,7 +41,8 @@ defmodule PhoenixDynamodb.Mixfile do
       {:cowboy, "~> 1.0"},
       {:ex_aws, "~> 1.0.0-beta0"},
       {:poison, "~> 2.0"},
-      {:hackney, "~> 1.6"}
+      {:hackney, "~> 1.6"},
+      { :uuid, "~> 1.1" }
     ]
   end
 
