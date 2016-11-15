@@ -18,8 +18,16 @@ defmodule PhoenixDynamodb.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {PhoenixDynamodb, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :mariaex, :ex_aws, :hackney, :poison]]
+     applications: [:phoenix,
+                    :phoenix_pubsub,
+                    :phoenix_html,
+                    :cowboy,
+                    :logger,
+                    :gettext,
+                    :ex_aws,
+                    :hackney,
+                    :poison
+                   ]]
   end
 
   # Specifies which paths to compile per environment.
@@ -33,8 +41,6 @@ defmodule PhoenixDynamodb.Mixfile do
     [
       {:phoenix, "~> 1.2.1"},
       {:phoenix_pubsub, "~> 1.0"},
-      {:phoenix_ecto, "~> 3.0"},
-      {:mariaex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.6"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
@@ -53,8 +59,8 @@ defmodule PhoenixDynamodb.Mixfile do
   #
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
-    ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"],
-     "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
+    [
+      "test": ["test"]
+    ]
   end
 end

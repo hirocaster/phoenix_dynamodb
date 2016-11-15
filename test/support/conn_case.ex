@@ -20,11 +20,6 @@ defmodule PhoenixDynamodb.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
 
-      alias PhoenixDynamodb.Repo
-      import Ecto
-      import Ecto.Changeset
-      import Ecto.Query
-
       import PhoenixDynamodb.Router.Helpers
 
       # The default endpoint for testing
@@ -33,12 +28,6 @@ defmodule PhoenixDynamodb.ConnCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(PhoenixDynamodb.Repo)
-
-    unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(PhoenixDynamodb.Repo, {:shared, self()})
-    end
-
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end
